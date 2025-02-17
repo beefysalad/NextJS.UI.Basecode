@@ -10,14 +10,15 @@ export default async function middleware(request: NextRequest) {
 
   const { pathname } = request.nextUrl;
 
-  const isProtected = protectedRoutes.some((route) =>
-    pathname.startsWith(route)
-  );
-    // Handle protected routes (like /user)
-    if (protectedRoutes.some((route) => pathname.startsWith(route)) && !session) {
-      // Redirect unauthenticated users to the login page
-      return NextResponse.redirect(new URL("/auth", request.url));
-    }
+  //TODO: COMEBACK HERE
+  // const isProtected = protectedRoutes.some((route) =>
+  //   pathname.startsWith(route)
+  // );
+  // Handle protected routes (like /user)
+  if (protectedRoutes.some((route) => pathname.startsWith(route)) && !session) {
+    // Redirect unauthenticated users to the login page
+    return NextResponse.redirect(new URL("/auth", request.url));
+  }
 
   //   // Handle routes like /auth and /auth/register
   //   if (publicRoutes.some((route) => pathname.startsWith(route)) && session) {

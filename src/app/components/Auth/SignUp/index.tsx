@@ -9,7 +9,6 @@ import { toast } from "@/hooks/use-toast";
 import { signUp } from "@/lib/actions";
 import { cn } from "@/lib/utils";
 
-import Link from "next/link";
 import React, { useState } from "react";
 
 const SignUpForm = ({
