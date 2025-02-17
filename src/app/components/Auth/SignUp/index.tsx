@@ -32,9 +32,8 @@ const SignUpForm = ({
     try {
       const rawData = await signUp(formData);
       const status = rawData?.status;
-      console.log(status);
+
       if (status && (status === 401 || status === 400)) {
-        alert("WENT HERE");
         toast({
           variant: "destructive",
           title: rawData.data.error,
