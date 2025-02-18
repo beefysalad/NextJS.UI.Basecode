@@ -1,7 +1,12 @@
 "use server";
 
+import { ROUTES } from "@/app/common/constants/route-pages";
 import { API } from "../app/common/constants/api-url";
-import { ISignUp } from "../app/common/interfaces/user";
+import { ISignIn, ISignUp } from "../app/common/interfaces/user";
+import { signIn, signOut } from "./auth";
+import { isRedirectError } from "next/dist/client/components/redirect-error";
+import { InvalidCredentialsError } from "@/lib/error";
+
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const signUp = async (userData: ISignUp) => {
@@ -21,3 +26,33 @@ export const signUp = async (userData: ISignUp) => {
     console.error(error);
   }
 };
+
+export const logIn = async () => {
+  await signIn("google",{redirectTo:ROUTES.ROOT})
+}
+
+export const logOut = async () => {
+  await signOut({ redirectTo: ROUTES.AUTH.SIGN_IN });
+};
+
+export const loginWithEmail = async({email,password}:ISignIn) => {
+  try {
+      await signIn("credentials",{
+        email,
+        password,
+        redirectTo:ROUTES.ROOT
+      })
+  } catch (error) {
+    if(isRedirectError(error)){
+      throw error;
+    }
+
+   // Throw a custom error for invalid credentials
+   if (error instanceof InvalidCredentialsError) {
+    return "Invalid Credentials"; // Error message for invalid login attempts
+  }
+
+  // General fallback error message
+  return "Something went wrong while checking your credentials. Please try again.";
+  }
+}

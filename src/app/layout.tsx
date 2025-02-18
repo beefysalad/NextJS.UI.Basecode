@@ -5,6 +5,7 @@ import { ThemeProvider } from "./components/ThemeProvider";
 import { Navbar } from "./components/shared/Navbar";
 import { Footer } from "./components/shared/Footer";
 import { Toaster } from "@/components/ui/toaster";
+import { SessionProvider } from "next-auth/react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +33,8 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         suppressHydrationWarning
       >
+
+        <SessionProvider>
         <ThemeProvider
           attribute='class'
           defaultTheme='dark'
@@ -45,6 +48,7 @@ export default function RootLayout({
           <Toaster/>
           <Footer />
         </ThemeProvider>
+        </SessionProvider>
       </body>
     </html>
   );

@@ -1,5 +1,6 @@
 "use client";
 
+import { ROUTES } from "@/app/common/constants/route-pages";
 import { ISignUp } from "@/app/common/interfaces/user";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -8,6 +9,7 @@ import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { signUp } from "@/lib/actions";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 import React, { useState } from "react";
 
@@ -32,11 +34,11 @@ const SignUpForm = ({
     try {
       const rawData = await signUp(formData);
       const status = rawData?.status;
-
+      console.log(rawData)
       if (status && (status === 401 || status === 400)) {
         toast({
           variant: "destructive",
-          title: rawData.data.error,
+          title: rawData.data.error[0],
           description: "Please try again",
         });
         setFormData({
@@ -110,12 +112,12 @@ const SignUpForm = ({
               >
                 {loading ? "Signing Up..." : "Sign Up"}
               </Button>
-              {/* <div className='text-center text-sm'>
+              <div className='text-center text-sm'>
                 Already have an account?{" "}
-                <Link href='/auth' className='underline underline-offset-4'>
+                <Link href={ROUTES.AUTH.SIGN_IN} className='underline underline-offset-4'>
                   Sign in
                 </Link>
-              </div> */}
+              </div>
             </div>
           </div>
         </CardContent>
