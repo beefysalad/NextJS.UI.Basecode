@@ -1,19 +1,17 @@
 "use client";
 
-import { signIn, useSession } from "next-auth/react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 
+import { ROUTES } from "@/app/common/constants/route-pages";
+import { ISignIn } from "@/app/common/interfaces/user";
+import { UI_STRINGS } from "@/app/common/magic-strings";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
-import { ISignIn } from "@/app/common/interfaces/user";
-import { ROUTES } from "@/app/common/constants/route-pages";
-import { UI_STRINGS } from "@/app/common/magic-strings";
 
 import { logIn, loginWithEmail } from "@/lib/actions";
 
@@ -21,9 +19,8 @@ export function SignInForm({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) {
-  const router = useRouter();
   const { toast } = useToast();
-  const { data: session } = useSession(); // Forces session refresh
+
   const [formData, setFormData] = useState<ISignIn>({
     email: "",
     password: "",
