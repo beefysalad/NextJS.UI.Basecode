@@ -11,14 +11,10 @@ import {
 import { logOut } from "@/lib/actions";
 import { auth } from "@/lib/auth";
 import Link from "next/link";
-import { redirect, useRouter } from "next/navigation";
 
 const ProfileDropdown = async () => {
   const session = await auth();
 
-  const navigateUserProfile = () => {
-    redirect(ROUTES.USER);
-  };
   const showProfileDropdown = () => {
     if (!session) return <></>;
     return (
