@@ -9,6 +9,13 @@ export const APP_STRINGS = {
       CONTINUE_WITH: "Or continue with",
       GOOGLE: "Google",
     },
+    SIGN_UP: {
+      SIGNING_UP: "Signing Up",
+      SIGN_UP_BUTTON: "Sign Up",
+      SIGN_UP_BUTTON_LOADING: "Signing up....",
+      ALREADY_HAVE_AN_ACCOUNT: "Already have an account?",
+      SIGN_IN: "Sign in",
+    },
   },
   ERRORS: {
     COMMON: {

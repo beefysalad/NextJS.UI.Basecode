@@ -14,6 +14,7 @@ import Link from "next/link";
 import { useState } from "react";
 
 import { logIn, loginWithEmail } from "@/lib/actions";
+import { isEmptyString } from "@/lib/helper";
 
 export function SignInForm({
   className,
@@ -29,6 +30,12 @@ export function SignInForm({
   const onHandleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { id, value } = e.target;
     setFormData((prev) => ({ ...prev, [id]: value }));
+  };
+  const isButtonDisabled = () => {
+    if (isEmptyString(formData.email) || isEmptyString(formData.password)) {
+      return true;
+    }
+    return loading;
   };
   const onHandleSubmit = async () => {
     if (!formData.email || !formData.password) return;
@@ -55,7 +62,7 @@ export function SignInForm({
   };
   return (
     <div className={cn("flex flex-col gap-6", className)} {...props}>
-      <Card>
+      <Card className='p-6'>
         <CardHeader className='text-center'>
           <CardTitle className='text-xl'>
             {APP_STRINGS.UI.LOGIN.WELCOME_MESSAGE}
@@ -70,7 +77,7 @@ export function SignInForm({
                   id='email'
                   type='email'
                   value={formData.email}
-                  placeholder='jpatrick@test.com'
+                  placeholder='Email...'
                   required
                   onChange={onHandleChange}
                 />
@@ -98,7 +105,7 @@ export function SignInForm({
                 type='submit'
                 className='w-full'
                 onClick={onHandleSubmit}
-                disabled={loading}
+                disabled={isButtonDisabled()}
               >
                 {loading
                   ? APP_STRINGS.UI.LOGIN.SIGNING_IN_LOADING

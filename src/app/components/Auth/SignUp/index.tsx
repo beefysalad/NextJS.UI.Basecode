@@ -2,12 +2,14 @@
 
 import { ROUTES } from "@/app/common/constants/route-pages";
 import { ISignUp } from "@/app/common/interfaces/user";
+import { APP_STRINGS } from "@/app/common/magic-strings";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { toast } from "@/hooks/use-toast";
 import { signUp } from "@/lib/actions";
+import { isEmptyString } from "@/lib/helper";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 
@@ -28,6 +30,16 @@ const SignUpForm = ({
     setFormData((prev) => ({ ...prev, [id]: value }));
   };
 
+  const isButtonDisabled = () => {
+    if (
+      isEmptyString(formData.email) ||
+      isEmptyString(formData.name) ||
+      isEmptyString(formData.password)
+    ) {
+      return true;
+    }
+    return loading;
+  };
   const onHandleSubmit = async () => {
     if (!formData.email || !formData.name || !formData.password) return;
     setLoading(true);
@@ -58,12 +70,14 @@ const SignUpForm = ({
   const [loading, setLoading] = useState<boolean>(false);
   return (
     <div
-      className={cn("flex flex-col items-center gap-6", className)}
+      className={cn("flex flex-col gap-6 items-center", className)}
       {...props}
     >
-      <Card className='w-full max-w-2xl p-6 sm:p-8'>
+      <Card className='w-auto sm:w-96 p-6 sm:p-8'>
         <CardHeader className='text-center'>
-          <CardTitle className='text-xl'>Signing Up</CardTitle>
+          <CardTitle className='text-xl'>
+            {APP_STRINGS.UI.SIGN_UP.SIGNING_UP}
+          </CardTitle>
         </CardHeader>
         <CardContent>
           <div className='grid '>
@@ -107,17 +121,19 @@ const SignUpForm = ({
                 type='submit'
                 className='w-full'
                 onClick={onHandleSubmit}
-                disabled={loading}
+                disabled={isButtonDisabled()}
               >
-                {loading ? "Signing Up..." : "Sign Up"}
+                {loading
+                  ? APP_STRINGS.UI.SIGN_UP.SIGN_UP_BUTTON_LOADING
+                  : APP_STRINGS.UI.SIGN_UP.SIGN_UP_BUTTON}
               </Button>
               <div className='text-center text-sm'>
-                Already have an account?{" "}
+                {APP_STRINGS.UI.SIGN_UP.ALREADY_HAVE_AN_ACCOUNT}{" "}
                 <Link
                   href={ROUTES.AUTH.SIGN_IN}
                   className='underline underline-offset-4'
                 >
-                  Sign in
+                  {APP_STRINGS.UI.SIGN_UP.SIGN_IN}
                 </Link>
               </div>
             </div>
