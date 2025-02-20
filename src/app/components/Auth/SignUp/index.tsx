@@ -34,7 +34,7 @@ const SignUpForm = ({
     try {
       const rawData = await signUp(formData);
       const status = rawData?.status;
-      console.log(rawData)
+      console.log(rawData);
       if (status && (status === 401 || status === 400)) {
         toast({
           variant: "destructive",
@@ -48,7 +48,6 @@ const SignUpForm = ({
         });
         return;
       }
-      // router.push("/auth");
     } catch (error) {
       console.error(error);
     } finally {
@@ -114,7 +113,10 @@ const SignUpForm = ({
               </Button>
               <div className='text-center text-sm'>
                 Already have an account?{" "}
-                <Link href={ROUTES.AUTH.SIGN_IN} className='underline underline-offset-4'>
+                <Link
+                  href={ROUTES.AUTH.SIGN_IN}
+                  className='underline underline-offset-4'
+                >
                   Sign in
                 </Link>
               </div>

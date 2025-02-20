@@ -6,7 +6,7 @@ import { ISignIn, ISignUp } from "../app/common/interfaces/user";
 import { signIn, signOut } from "./auth";
 import { isRedirectError } from "next/dist/client/components/redirect-error";
 import { InvalidCredentialsError } from "@/lib/error";
-
+import { APP_STRINGS } from "@/app/common/magic-strings";
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL;
 export const signUp = async (userData: ISignUp) => {
@@ -28,31 +28,32 @@ export const signUp = async (userData: ISignUp) => {
 };
 
 export const logIn = async () => {
-  await signIn("google",{redirectTo:ROUTES.ROOT})
-}
+  await signIn("google", { redirectTo: ROUTES.ROOT });
+};
 
 export const logOut = async () => {
   await signOut({ redirectTo: ROUTES.AUTH.SIGN_IN });
 };
 
-export const loginWithEmail = async({email,password}:ISignIn) => {
+export const loginWithEmail = async ({ email, password }: ISignIn) => {
   try {
-      await signIn("credentials",{
-        email,
-        password,
-        redirectTo:ROUTES.ROOT
-      })
+    await signIn("credentials", {
+      email,
+      password,
+      redirectTo: ROUTES.ROOT,
+    });
   } catch (error) {
-    if(isRedirectError(error)){
+    if (isRedirectError(error)) {
       throw error;
     }
 
-   // Throw a custom error for invalid credentials
-   if (error instanceof InvalidCredentialsError) {
-    return "Invalid Credentials"; // Error message for invalid login attempts
-  }
+    // Throw a custom error for invalid credentials
+    if (error instanceof InvalidCredentialsError) {
+      return APP_STRINGS.ERRORS.COMMON.INVALID_CREDENTIAL; // Error message for invalid login attempts
+    }
 
-  // General fallback error message
-  return "Something went wrong while checking your credentials. Please try again.";
+    // General fallback error message
+    return APP_STRINGS.ERRORS.COMMON
+      .SOMETHING_WENT_WRONG_WITH_CREDENTIALS_CHECKING;
   }
-}
+};

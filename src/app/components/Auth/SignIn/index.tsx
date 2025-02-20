@@ -8,7 +8,7 @@ import { useToast } from "@/hooks/use-toast";
 
 import { ROUTES } from "@/app/common/constants/route-pages";
 import { ISignIn } from "@/app/common/interfaces/user";
-import { UI_STRINGS } from "@/app/common/magic-strings";
+import { APP_STRINGS } from "@/app/common/magic-strings";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { useState } from "react";
@@ -58,7 +58,7 @@ export function SignInForm({
       <Card>
         <CardHeader className='text-center'>
           <CardTitle className='text-xl'>
-            {UI_STRINGS.LOGIN.WELCOME_MESSAGE}
+            {APP_STRINGS.UI.LOGIN.WELCOME_MESSAGE}
           </CardTitle>
         </CardHeader>
         <CardContent>
@@ -82,7 +82,7 @@ export function SignInForm({
                     href='#'
                     className='ml-auto text-sm underline-offset-4 hover:underline'
                   >
-                    {UI_STRINGS.LOGIN.FORGET_PASSWORD}
+                    {APP_STRINGS.UI.LOGIN.FORGET_PASSWORD}
                   </a>
                 </div>
                 <Input
@@ -101,8 +101,8 @@ export function SignInForm({
                 disabled={loading}
               >
                 {loading
-                  ? UI_STRINGS.LOGIN.SIGNING_IN_LOADING
-                  : UI_STRINGS.LOGIN.LOGIN_BUTTON}
+                  ? APP_STRINGS.UI.LOGIN.SIGNING_IN_LOADING
+                  : APP_STRINGS.UI.LOGIN.LOGIN_BUTTON}
               </Button>
             </div>
 
@@ -118,7 +118,7 @@ export function SignInForm({
 
             <div className='relative text-center text-sm after:absolute after:inset-0 after:top-1/2 after:z-0 after:flex after:items-center after:border-t after:border-border'>
               <span className='relative z-10 bg-background px-2 text-muted-foreground'>
-                {UI_STRINGS.LOGIN.CONTINUE_WITH}
+                {APP_STRINGS.UI.LOGIN.CONTINUE_WITH}
               </span>
             </div>
             <div className='flex flex-col gap-4'>
@@ -130,7 +130,7 @@ export function SignInForm({
                       fill='currentColor'
                     />
                   </svg>
-                  {UI_STRINGS.LOGIN.GOOGLE}
+                  {APP_STRINGS.UI.LOGIN.GOOGLE}
                 </Button>
               </form>
             </div>

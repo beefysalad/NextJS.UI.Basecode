@@ -6,6 +6,7 @@ import { prisma } from "./prisma";
 import { schema } from "./zod";
 import bcrypt from "bcryptjs";
 import { InvalidCredentialsError } from "@/lib/error";
+import { APP_STRINGS } from "@/app/common/magic-strings";
 
 export const { handlers, signIn, signOut, auth } = NextAuth({
   providers: [
@@ -24,7 +25,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
               email: credentials.email as string,
             },
           });
-          if (!user) throw new InvalidCredentialsError("User not found");
+          if (!user)
+            throw new InvalidCredentialsError(
+              APP_STRINGS.ERRORS.COMMON.USER_NOT_FOUND
+            );
 
           return user;
         }
@@ -33,7 +37,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         const validated = schema.safeParse(credentials);
 
         if (validated.error)
-          throw new InvalidCredentialsError("Could not parse credentials");
+          throw new InvalidCredentialsError(
+            APP_STRINGS.ERRORS.COMMON.COULD_NOT_PARSE_CREDS
+          );
 
         const { email, password } = validated.data;
 
@@ -43,7 +49,10 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
           },
         });
 
-        if (!user) throw new InvalidCredentialsError("Invalid Credentials");
+        if (!user)
+          throw new InvalidCredentialsError(
+            APP_STRINGS.ERRORS.COMMON.INVALID_CREDENTIAL
+          );
 
         const isPasswordsMatch = await bcrypt.compare(
           password,
@@ -51,7 +60,9 @@ export const { handlers, signIn, signOut, auth } = NextAuth({
         );
 
         if (!isPasswordsMatch)
-          throw new InvalidCredentialsError("Invalid Credentials");
+          throw new InvalidCredentialsError(
+            APP_STRINGS.ERRORS.COMMON.INVALID_CREDENTIAL
+          );
 
         return user;
       },
