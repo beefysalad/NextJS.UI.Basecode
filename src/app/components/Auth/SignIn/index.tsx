@@ -42,7 +42,7 @@ export function SignInForm({
     setLoading(true);
     try {
       const result = await loginWithEmail(formData);
-      console.log(result);
+
       if (result) {
         toast({
           variant: "destructive",

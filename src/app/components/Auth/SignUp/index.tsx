@@ -12,6 +12,7 @@ import { signUp } from "@/lib/actions";
 import { isEmptyString } from "@/lib/helper";
 import { cn } from "@/lib/utils";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 import React, { useState } from "react";
 
@@ -19,6 +20,7 @@ const SignUpForm = ({
   className,
   ...props
 }: React.ComponentPropsWithoutRef<"div">) => {
+  const router = useRouter();
   const [formData, setFormData] = useState<ISignUp>({
     email: "",
     name: "",
@@ -46,7 +48,7 @@ const SignUpForm = ({
     try {
       const rawData = await signUp(formData);
       const status = rawData?.status;
-      console.log(rawData);
+
       if (status && (status === 401 || status === 400)) {
         toast({
           variant: "destructive",
@@ -60,6 +62,7 @@ const SignUpForm = ({
         });
         return;
       }
+      router.push(ROUTES.AUTH.SIGN_IN)
     } catch (error) {
       console.error(error);
     } finally {
