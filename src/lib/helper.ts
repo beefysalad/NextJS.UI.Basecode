@@ -1,3 +1,3 @@
-export const isEmptyString = (value: string): Boolean => {
+export const isEmptyString = (value: string): boolean => {
   return value === "" ? true : false;
 };
