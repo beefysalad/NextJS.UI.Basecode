@@ -1,8 +1,68 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js Basecode with Prisma and shadcn/ui
+
+This repository serves as a basecode for a Next.js project, leveraging **Prisma** for backend operations and **shadcn/ui** for building modern, accessible, and customizable user interfaces. Use this as a starting point for your Next.js applications.
+
+---
+
+## Features
+
+- **Next.js 14**: Built with the latest version of Next.js, supporting the App Router and React Server Components.
+- **Prisma**: A modern ORM for Node.js and TypeScript, providing a type-safe database client.
+- **shadcn/ui**: A collection of beautifully designed, customizable, and accessible UI components.
+- **TypeScript**: Fully typed for better developer experience and fewer runtime errors.
+- **Tailwind CSS**: Utility-first CSS framework for rapid UI development.
+
+---
 
 ## Getting Started
 
-First, run the development server:
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/your-username/your-repo-name.git
+cd your-repo-name
+```
+
+### 2. Install dependencies
+
+```base
+npm install
+# or
+yarn install
+# or
+pnpm install
+# or
+bun install
+```
+
+### 3. Setup Environmental Variables
+
+Create a `.env` file in the root directory and add your environmental variables:
+
+```base
+# Created by Vercel CLI
+AUTH_SECRET="your_auth_secret" # Added by `npx auth`. Read more: https://cli.authjs.dev
+DATABASE_URL="postgres://user:password@your-db-host.com/dbname?sslmode=require"
+DATABASE_URL_UNPOOLED="postgresql://user:password@your-db-host.com/dbname?sslmode=require"
+PGDATABASE="your_db_name"
+PGHOST="your-db-host.com"
+PGHOST_UNPOOLED="your-db-host.com"
+PGPASSWORD="your_db_password"
+PGUSER="your_db_user"
+POSTGRES_DATABASE="your_db_name"
+POSTGRES_HOST="your-db-host.com"
+POSTGRES_PASSWORD="your_db_password"
+POSTGRES_PRISMA_URL="postgres://user:password@your-db-host.com/dbname?pgbouncer=true&connect_timeout=15&sslmode=require"
+POSTGRES_URL="postgres://user:password@your-db-host.com/dbname?sslmode=require"
+POSTGRES_URL_NON_POOLING="postgres://user:password@your-db-host.com/dbname?sslmode=require"
+POSTGRES_URL_NO_SSL="postgres://user:password@your-db-host.com/dbname"
+POSTGRES_USER="your_db_user"
+AUTH_GOOGLE_ID="your_google_client_id"
+AUTH_GOOGLE_SECRET="your_google_client_secret"
+NEXT_PUBLIC_API_URL="http://localhost:3000/api"
+```
+
+### 4. Run the development Server
 
 ```bash
 npm run dev
@@ -14,23 +74,100 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+You can also run prisma studio by:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```bash
+npm run db:studio
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open http://localhost:3000 in your browser to see the application running.
 
-## Learn More
+### Project Structure
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+.
+├── app/                     # App Router directory
+│   ├── api/                 # API routes
+│   ├── components/          # Reusable components
+│   ├── lib/                 # Utility functions and libraries
+│   ├── page.tsx             # Home page
+│   └── ...                  # Other pages and layouts
+├── prisma/                  # Prisma schema and migrations
+│   └── schema.prisma
+├── public/                  # Static assets
+├── styles/                  # Global styles
+├── .env                     # Environment variables
+├── .gitignore               # Git ignore file
+├── next.config.js           # Next.js configuration
+├── package.json             # Project dependencies
+├── tailwind.config.js       # Tailwind CSS configuration
+└── tsconfig.json            # TypeScript configuration
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Prisma Setup
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+1. Initialize Prisma: If you haven't already, initialize Prisma in your project:
 
-## Deploy on Vercel
+```bash
+npx prisma init
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Define Your Schema: Edit the prisma/schema.prisma file to define your database schema.
+3. Migrate Database: Run the following command to apply your schema to the database:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```bash
+npx prisma migrate dev --name init
+```
+
+4. Generate Prisma Client: Generate the Prisma Client to interact with your database:
+
+```bash
+npx prisma generate
+```
+
+### Using shadcn/ui
+
+This project includes shadcn/ui for building UI components. You can customize and use these components directly in your project. Check out the [shadcn/ui documentation](https://ui.shadcn.com/docs)documentation for more details.
+
+## Adding a ShadCN Component
+
+To add a ShadCN component, run:
+
+```bash
+npx shadcn@latest add button
+```
+
+Example Usage
+
+```javascript
+import { Button } from "@/components/ui/button";
+
+export default function Home() {
+  return (
+    <div>
+      <h1>Welcome to Next.js!</h1>
+      <Button>Click Me</Button>
+    </div>
+  );
+}
+```
+
+### Deployment
+
+Deploy on vercel
+
+The easiest way to deploy your Next.js app is to use the Vercel Platform from the creators of Next.js.
+
+1. Push your code to a GitHub repository.
+
+2. Import the repository into Vercel.
+
+3. Vercel will automatically detect the Next.js project and deploy it.
+
+### Contributing
+
+Contributions are welcome! If you find any issues or have suggestions for improvements, feel free to open an issue or submit a pull request.
+
+## Owner
+
+This repository is maintained by **John Patrick Ryan Mandal**.
