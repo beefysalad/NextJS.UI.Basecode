@@ -6,7 +6,7 @@ This repository serves as a basecode for a Next.js project, leveraging **Prisma*
 
 ## Features
 
-- **Next.js 14**: Built with the latest version of Next.js, supporting the App Router and React Server Components.
+- **Next.js 15**: Built with the latest version of Next.js, supporting the App Router and React Server Components.
 - **Prisma**: A modern ORM for Node.js and TypeScript, providing a type-safe database client.
 - **shadcn/ui**: A collection of beautifully designed, customizable, and accessible UI components.
 - **TypeScript**: Fully typed for better developer experience and fewer runtime errors.
@@ -19,7 +19,7 @@ This repository serves as a basecode for a Next.js project, leveraging **Prisma*
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/your-username/your-repo-name.git
+git clone https://github.com/beefysalad/NextJS.UI.Basecode.git
 cd your-repo-name
 ```
 
@@ -127,7 +127,7 @@ npx prisma generate
 
 ### Using shadcn/ui
 
-This project includes shadcn/ui for building UI components. You can customize and use these components directly in your project. Check out the [shadcn/ui documentation](https://ui.shadcn.com/docs)documentation for more details.
+This project includes shadcn/ui for building UI components. You can customize and use these components directly in your project. Check out the [shadcn/ui documentation](https://ui.shadcn.com/docs) for more details.
 
 ## Adding a ShadCN Component
 
@@ -171,3 +171,9 @@ Contributions are welcome! If you find any issues or have suggestions for improv
 ## Owner
 
 This repository is maintained by **John Patrick Ryan Mandal**.
+
+### Contact
+
+- 📧 Email: [mandal.johnpatrickryan@gmail.com](mailto:mandal.johnpatrickryan@gmail.com)
+- 🔗 LinkedIn: [John Patrick Ryan Mandal](https://www.linkedin.com/in/john-patrick-ryan-mandal-407bb8270/)
+- 🌐 Website: [ptrckk.dev](https://www.ptrckk.dev/)
