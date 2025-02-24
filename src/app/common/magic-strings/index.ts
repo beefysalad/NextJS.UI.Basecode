@@ -28,6 +28,7 @@ export const APP_STRINGS = {
     VALIDATION: {
       INVALID_EMAIL: "Please provide a valid email address.",
       PASSWORD_TOO_SHORT: "Password must be at least 4 characters long.",
+      EXISTING_USER: "User with that email address already exists!"
     },
   },
 };
