@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import bcrypt from "bcryptjs";
 import { schema } from "@/lib/zod";
 import { prisma } from "@/lib/prisma";
+import { APP_STRINGS } from "@/app/common/magic-strings";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -24,7 +25,7 @@ export async function POST(req: NextRequest) {
 
     if (existingUser) {
       return NextResponse.json(
-        { error: "User already exists" },
+        { error: APP_STRINGS.ERRORS.VALIDATION.EXISTING_USER },
         { status: 400 }
       );
     }

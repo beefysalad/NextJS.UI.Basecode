@@ -49,11 +49,12 @@ const SignUpForm = ({
     try {
       const rawData = await signUp(formData);
       const status = rawData?.status;
-
       if (status && (status === 401 || status === 400)) {
+        const isErrorArray = Array.isArray(rawData.data.error);
+        const error = isErrorArray ? rawData.data.error[0] : rawData.data.error;
         toast({
           variant: "destructive",
-          title: rawData.data.error[0],
+          title: error,
           description: "Please try again",
         });
         setFormData({
