@@ -12,7 +12,7 @@ export default async function Home() {
   }
   return (
     <>
-      <div>hello {session.user?.name}</div>{" "}
+      <div>hello {session.user?.name}</div>
       <Button onClick={logOut} className='mt-5'>
         Sign out
       </Button>

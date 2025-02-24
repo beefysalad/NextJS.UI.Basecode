@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 import { toast } from "@/hooks/use-toast";
 import { signUp } from "@/lib/actions";
 import { isEmptyString } from "@/lib/helper";
@@ -62,7 +63,7 @@ const SignUpForm = ({
         });
         return;
       }
-      router.push(ROUTES.AUTH.SIGN_IN)
+      router.push(ROUTES.AUTH.SIGN_IN);
     } catch (error) {
       console.error(error);
     } finally {
@@ -126,9 +127,14 @@ const SignUpForm = ({
                 onClick={onHandleSubmit}
                 disabled={isButtonDisabled()}
               >
-                {loading
-                  ? APP_STRINGS.UI.SIGN_UP.SIGN_UP_BUTTON_LOADING
-                  : APP_STRINGS.UI.SIGN_UP.SIGN_UP_BUTTON}
+                {loading ? (
+                  <>
+                    {APP_STRINGS.UI.SIGN_UP.SIGN_UP_BUTTON_LOADING}{" "}
+                    <LoadingSpinner />
+                  </>
+                ) : (
+                  APP_STRINGS.UI.SIGN_UP.SIGN_UP_BUTTON
+                )}
               </Button>
               <div className='text-center text-sm'>
                 {APP_STRINGS.UI.SIGN_UP.ALREADY_HAVE_AN_ACCOUNT}{" "}

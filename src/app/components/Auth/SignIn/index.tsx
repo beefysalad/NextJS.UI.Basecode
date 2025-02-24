@@ -15,6 +15,7 @@ import { useState } from "react";
 
 import { logIn, loginWithEmail } from "@/lib/actions";
 import { isEmptyString } from "@/lib/helper";
+import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 export function SignInForm({
   className,
@@ -107,9 +108,13 @@ export function SignInForm({
                 onClick={onHandleSubmit}
                 disabled={isButtonDisabled()}
               >
-                {loading
-                  ? APP_STRINGS.UI.LOGIN.SIGNING_IN_LOADING
-                  : APP_STRINGS.UI.LOGIN.LOGIN_BUTTON}
+                {loading ? (
+                  <>
+                    {APP_STRINGS.UI.LOGIN.SIGNING_IN_LOADING} <LoadingSpinner />
+                  </>
+                ) : (
+                  APP_STRINGS.UI.LOGIN.LOGIN_BUTTON
+                )}
               </Button>
             </div>
 
