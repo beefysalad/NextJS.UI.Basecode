@@ -3,7 +3,6 @@ import { logOut } from "@/lib/actions";
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import { ROUTES } from "./common/constants/route-pages";
-import { LoadingSpinner } from "@/components/ui/loading-spinner";
 
 export default async function Home() {
   const session = await auth();
