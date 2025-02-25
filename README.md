@@ -60,6 +60,8 @@ POSTGRES_USER="your_db_user"
 AUTH_GOOGLE_ID="your_google_client_id"
 AUTH_GOOGLE_SECRET="your_google_client_secret"
 NEXT_PUBLIC_API_URL="http://localhost:3000/api"
+EMAIL_PASS="your_email_pass" # FOR EMAIL SENDING NOTIFICATION
+EMAIL_USER="your_email_user" # FOR EMAIL SENDING NOTIFICATION
 ```
 
 ### 4. Run the development Server
