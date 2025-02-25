@@ -73,7 +73,7 @@ export function SignInForm({
           <div className='grid gap-6'>
             <div className='grid gap-6'>
               <div className='grid gap-2'>
-                <Label htmlFor='email'>Email</Label>
+                <Label htmlFor='email'>{APP_STRINGS.UI.LOGIN.EMAIL}</Label>
                 <Input
                   id='email'
                   type='email'
@@ -85,7 +85,9 @@ export function SignInForm({
               </div>
               <div className='grid gap-2'>
                 <div className='flex items-center'>
-                  <Label htmlFor='password'>Password</Label>
+                  <Label htmlFor='password'>
+                    {APP_STRINGS.UI.LOGIN.PASSWORD}
+                  </Label>
                   <a
                     href='#'
                     className='ml-auto text-sm underline-offset-4 hover:underline'

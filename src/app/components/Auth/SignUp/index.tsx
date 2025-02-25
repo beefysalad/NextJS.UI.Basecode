@@ -88,7 +88,7 @@ const SignUpForm = ({
           <div className='grid '>
             <div className='grid gap-6'>
               <div className='grid gap-2'>
-                <Label htmlFor='name'>Name</Label>
+                <Label htmlFor='name'>{APP_STRINGS.UI.SIGN_UP.NAME}</Label>
                 <Input
                   id='name'
                   type='text'
@@ -99,7 +99,7 @@ const SignUpForm = ({
                 />
               </div>
               <div className='grid gap-2'>
-                <Label htmlFor='email'>Email</Label>
+                <Label htmlFor='email'>{APP_STRINGS.UI.SIGN_UP.EMAIL}</Label>
                 <Input
                   id='email'
                   type='email'
@@ -111,7 +111,9 @@ const SignUpForm = ({
               </div>
               <div className='grid gap-2'>
                 <div className='flex items-center'>
-                  <Label htmlFor='password'>Password</Label>
+                  <Label htmlFor='password'>
+                    {APP_STRINGS.UI.SIGN_UP.PASSWORD}
+                  </Label>
                 </div>
                 <Input
                   id='password'

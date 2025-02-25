@@ -8,6 +8,8 @@ export const APP_STRINGS = {
       SIGNING_IN_LOADING: "Signing in",
       CONTINUE_WITH: "Or continue with",
       GOOGLE: "Google",
+      EMAIL: "Email",
+      PASSWORD: "Password",
     },
     SIGN_UP: {
       SIGNING_UP: "Signing Up",
@@ -15,6 +17,14 @@ export const APP_STRINGS = {
       SIGN_UP_BUTTON_LOADING: "Signing up",
       ALREADY_HAVE_AN_ACCOUNT: "Already have an account?",
       SIGN_IN: "Sign in",
+      NAME: "Name",
+      EMAIL: "Email",
+      PASSWORD: "Password",
+    },
+    PROFILE_DROPDOWN: {
+      SETTINGS: "Settings",
+      PROFILE: "Profile",
+      LOGOUT: "Log out",
     },
   },
   ERRORS: {
@@ -28,7 +38,7 @@ export const APP_STRINGS = {
     VALIDATION: {
       INVALID_EMAIL: "Please provide a valid email address.",
       PASSWORD_TOO_SHORT: "Password must be at least 4 characters long.",
-      EXISTING_USER: "User with that email address already exists!"
+      EXISTING_USER: "User with that email address already exists!",
     },
   },
 };
