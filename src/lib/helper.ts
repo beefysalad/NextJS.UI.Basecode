@@ -1,3 +1,4 @@
+import { randomBytes } from "crypto";
 export const isEmptyString = (value: string): boolean => {
   return value === "" ? true : false;
 };
@@ -16,12 +17,13 @@ export const generateOTP = (): { otp: number; expiresAt: Date } => {
 };
 
 export const generateRandomPassword = (): string => {
-  let randomString: string = "";
   const length = 10;
-  while (randomString.length < length) {
-    randomString += Math.random().toString(36).substring(2, 15);
-  }
-  return randomString.substring(0, length);
+  const randomBytesArray = randomBytes(length);
+  return Array.from(randomBytesArray, (byte) =>
+    ("0" + (byte & 0xff).toString(16)).slice(-2)
+  )
+    .join("")
+    .substring(0, length);
 };
 
 export const isRestrictionOver = (
