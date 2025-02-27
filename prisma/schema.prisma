@@ -83,3 +83,16 @@ model Authenticator {
 
   @@id([userId, credentialID])
 }
+
+model Otp {
+  id             String    @id @default(cuid())
+  email          String    @unique
+  otp            Int
+  expiresAt      DateTime
+  changePassword Boolean   @default(false)
+  restricted     Boolean   @default(false)
+  restrictedDate DateTime?
+  attempts       Int       @default(0)
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @default(now())
+}

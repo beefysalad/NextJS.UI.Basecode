@@ -8,6 +8,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { PasswordInput } from "@/components/ui/password-input";
 import { toast } from "@/hooks/use-toast";
 import { signUp } from "@/lib/actions";
 import { isEmptyString } from "@/lib/helper";
@@ -115,13 +116,12 @@ const SignUpForm = ({
                     {APP_STRINGS.UI.SIGN_UP.PASSWORD}
                   </Label>
                 </div>
-                <Input
-                  id='password'
-                  type='password'
-                  required
+                <PasswordInput
                   placeholder='Password...'
-                  onChange={onHandleChange}
+                  id='password'
+                  required
                   value={formData.password}
+                  onChange={onHandleChange}
                 />
               </div>
               <Button

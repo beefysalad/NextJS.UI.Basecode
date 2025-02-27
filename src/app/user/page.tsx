@@ -1,4 +1,4 @@
-import { Avatar, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { auth } from "@/lib/auth";
 import React from "react";
 
@@ -12,6 +12,7 @@ const UserPage = async () => {
       <div>
         <Avatar>
           <AvatarImage src={session?.user?.image ?? " "} />
+          <AvatarFallback>{session?.user?.name?.slice(0, 1)}</AvatarFallback>
         </Avatar>
       </div>
     </>

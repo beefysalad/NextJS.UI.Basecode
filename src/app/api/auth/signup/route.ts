@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json(
       { error: error },
       {
-        status: 400,
+        status: APP_STRINGS.STATUS_CODES.BAD_REQUEST,
       }
     );
   }
@@ -26,7 +26,7 @@ export async function POST(req: NextRequest) {
     if (existingUser) {
       return NextResponse.json(
         { error: APP_STRINGS.ERRORS.VALIDATION.EXISTING_USER },
-        { status: 400 }
+        { status: APP_STRINGS.STATUS_CODES.BAD_REQUEST }
       );
     }
     const hashedPassword = await bcrypt.hash(body.password, 10);
@@ -37,14 +37,17 @@ export async function POST(req: NextRequest) {
         hashedPassword: hashedPassword,
       },
     });
-    return NextResponse.json({ user }, { status: 201 });
+    return NextResponse.json(
+      { user },
+      { status: APP_STRINGS.STATUS_CODES.CREATED }
+    );
   } catch (error) {
     return NextResponse.json(
       {
-        error: "Something went wrong " + error,
+        error: `${APP_STRINGS.ERRORS.COMMON.SOMETHING_WENT_WRONG} ${error}`,
       },
       {
-        status: 404,
+        status: APP_STRINGS.STATUS_CODES.NOT_FOUND,
       }
     );
   }

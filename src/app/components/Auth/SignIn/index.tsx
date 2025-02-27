@@ -16,6 +16,7 @@ import { useState } from "react";
 import { logIn, loginWithEmail } from "@/lib/actions";
 import { isEmptyString } from "@/lib/helper";
 import { LoadingSpinner } from "@/components/ui/loading-spinner";
+import { PasswordInput } from "@/components/ui/password-input";
 
 export function SignInForm({
   className,
@@ -89,18 +90,17 @@ export function SignInForm({
                     {APP_STRINGS.UI.LOGIN.PASSWORD}
                   </Label>
                   <a
-                    href='#'
+                    href={ROUTES.AUTH.FORGOT_PASSWORD}
                     className='ml-auto text-sm underline-offset-4 hover:underline'
                   >
                     {APP_STRINGS.UI.LOGIN.FORGET_PASSWORD}
                   </a>
                 </div>
-                <Input
+                <PasswordInput
+                  placeholder='Password...'
                   id='password'
-                  type='password'
                   required
                   value={formData.password}
-                  placeholder='Password...'
                   onChange={onHandleChange}
                 />
               </div>
