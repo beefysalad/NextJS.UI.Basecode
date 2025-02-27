@@ -4,6 +4,7 @@ export const ROUTES = {
     SIGN_UP: "/sign-up",
     SIGN_IN: "/sign-in",
     API_AUTH_SIGN_IN: "/api/auth/signin",
+    FORGOT_PASSWORD: "/forgot-password",
   },
   USER: "/user",
 };

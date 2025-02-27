@@ -36,7 +36,7 @@ export async function POST(req: NextRequest) {
           status: APP_STRINGS.STATUS_CODES.NOT_FOUND,
         }
       );
-    await prisma.otp.upsert({
+    const otpObj = await prisma.otp.upsert({
       where: { email: email },
       update: { otp, expiresAt, attempts: 0, changePassword: false },
       create: { email, otp, expiresAt, changePassword: false },
@@ -49,7 +49,11 @@ export async function POST(req: NextRequest) {
 
     await transporter.sendMail(mail);
     return NextResponse.json(
-      { message: APP_STRINGS.EMAIL_NOTIFICATION.SUCCESS },
+      {
+        message: APP_STRINGS.EMAIL_NOTIFICATION.SUCCESS,
+        restricted: otpObj.restricted,
+        restrictedDate: otpObj.restrictedDate,
+      },
       { status: APP_STRINGS.STATUS_CODES.OK }
     );
   } catch (error) {

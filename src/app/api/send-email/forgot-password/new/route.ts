@@ -61,9 +61,12 @@ export async function POST(req: NextRequest) {
         },
       });
 
-      return NextResponse.json(APP_STRINGS.SUCCESS.COMMON.PASSWORD_CHANGED, {
-        status: APP_STRINGS.STATUS_CODES.CREATED,
-      });
+      return NextResponse.json(
+        APP_STRINGS.SUCCESS.COMMON.PASSWORD_CHANGED_EMAIL,
+        {
+          status: APP_STRINGS.STATUS_CODES.OK,
+        }
+      );
     }
   } catch (error) {
     return NextResponse.json(

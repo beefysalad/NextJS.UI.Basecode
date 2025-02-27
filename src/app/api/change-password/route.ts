@@ -1,6 +1,4 @@
 import { APP_STRINGS } from "@/app/common/magic-strings";
-import { generateRandomPassword } from "@/lib/helper";
-import { mailOptions, transporter } from "@/lib/nodemailer";
 import { prisma } from "@/lib/prisma";
 import { changePwSchema } from "@/lib/zod";
 import bcrypt from "bcryptjs";
@@ -8,6 +6,7 @@ import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
+
   const validation = changePwSchema.safeParse(body);
   if (!validation.success) {
     const error = validation.error.errors.map((error) => error.message);

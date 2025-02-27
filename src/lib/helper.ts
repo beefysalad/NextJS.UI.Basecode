@@ -23,3 +23,13 @@ export const generateRandomPassword = (): string => {
   }
   return randomString.substring(0, length);
 };
+
+export const isRestrictionOver = (
+  restrictedDate: Date,
+  restricted: boolean
+): boolean => {
+  if (!restricted) return false;
+
+  const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000);
+  return restrictedDate <= fiveMinutesAgo;
+};

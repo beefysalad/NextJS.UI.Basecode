@@ -1,9 +1,10 @@
 import { APP_STRINGS } from "@/app/common/magic-strings";
-import { generateRandomPassword } from "@/lib/helper";
+import { isRestrictionOver } from "@/lib/helper";
 import { prisma } from "@/lib/prisma";
 import { otpSchema } from "@/lib/zod";
 import { NextRequest, NextResponse } from "next/server";
 
+//TODO: PROPER HANDLING FOR WHEN RESTRICTION IS OVER, FOR NOW IT IS NOT STRICTLY IMPLEMENTED
 export async function POST(req: NextRequest) {
   const body = await req.json();
   const validation = otpSchema.safeParse(body);
@@ -18,12 +19,12 @@ export async function POST(req: NextRequest) {
   }
   try {
     const { otp, email } = body;
+    /* eslint-disable @typescript-eslint/no-unused-vars */
     const [otpValid, _] = await prisma.$transaction([
       // find email and otp combination
       prisma.otp.findFirst({
         where: {
           email,
-          otp: Number(otp),
         },
       }),
       //update the otp attempt count for rate limiting controls
@@ -39,17 +40,44 @@ export async function POST(req: NextRequest) {
       }),
     ]);
 
-    if (!otpValid || otpValid.attempts > 6) {
+    if (otpValid?.attempts && otpValid?.attempts > 6) {
+      if (otpValid?.restricted && otpValid.restrictedDate) {
+        if (isRestrictionOver(otpValid.restrictedDate, otpValid.restricted)) {
+          await prisma.otp.update({
+            where: {
+              email,
+            },
+            data: {
+              restricted: false,
+              restrictedDate: null,
+              attempts: 0,
+            },
+          });
+        }
+      } else {
+        await prisma.otp.update({
+          where: {
+            email,
+          },
+          data: {
+            restricted: true,
+            restrictedDate: new Date(),
+          },
+        });
+        return NextResponse.json(
+          { error: APP_STRINGS.ERRORS.COMMON.OTP_LIMIT },
+          { status: APP_STRINGS.STATUS_CODES.UNAUTHORIZED }
+        );
+      }
+    }
+
+    if (otpValid?.otp !== Number(otp)) {
       return NextResponse.json(
-        {
-          error:
-            otpValid && otpValid?.attempts > 6 && otpValid.otp === Number(otp)
-              ? APP_STRINGS.ERRORS.COMMON.OTP_LIMIT
-              : APP_STRINGS.ERRORS.COMMON.MISMATCH_OTP,
-        },
+        { error: APP_STRINGS.ERRORS.COMMON.MISMATCH_OTP },
         { status: APP_STRINGS.STATUS_CODES.NOT_FOUND }
       );
     }
+
     await prisma.otp.update({
       where: {
         email: email,

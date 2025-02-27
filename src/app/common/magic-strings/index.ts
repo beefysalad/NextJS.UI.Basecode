@@ -1,5 +1,6 @@
 export const APP_STRINGS = {
   UI: {
+    COMMON: { EMAIL: "Email Address" },
     LOGIN: {
       NO_ACCOUNT: "Don't have an account?",
       FORGET_PASSWORD: "Forgot your password?",
@@ -26,6 +27,49 @@ export const APP_STRINGS = {
       PROFILE: "Profile",
       LOGOUT: "Log out",
     },
+    FORGET_PASSWORD: {
+      MULTISTEP_FORM: {
+        STEPS: {
+          STEP_ONE: {
+            TITLE: "Enter your email",
+            DESCRRIPTION: "We'll send a verification code to your email",
+          },
+          STEP_TWO: {
+            TITLE: "Verify Your Identity",
+            DESCRRIPTION: "Enter the 6-digit code sent to your email",
+          },
+          STEP_THREE: {
+            TITLE: "Update Password",
+            DESCRRIPTION: "Create a new password for your account",
+          },
+          STEP_FOUR: {
+            TITLE: "Success",
+            DESCRRIPTION: "Your password has been updated successfully",
+          },
+        },
+        STEPPER: {
+          STEP_ONE: "Email",
+          STEP_TWO: "Verify",
+          STEP_THREE: "Password",
+        },
+        BUTTON: {
+          OTP_CONTINUE: "Continue",
+          OTP_LOADING: "Sending OTP",
+          VERIFY: "Verify",
+          VERIFY_LOADING: "Verifying",
+          BACK: "Back",
+          RESEND: "Resend",
+          CHANGE_PASSWORD: "Update Password",
+          CHANGE_PASSWORD_LOADING: "Updating Password",
+          DONE: "Done",
+        },
+        TEXT: {
+          NO_CODE: "Didn't receive a code? ",
+          CHANGE_PW_SUCCESS:
+            "Your password has been successfully updated. You can now log in with your new password.",
+        },
+      },
+    },
   },
   ERRORS: {
     COMMON: {
@@ -37,17 +81,20 @@ export const APP_STRINGS = {
         "Something went wrong while updating your credentials. Please try again.",
       USER_NOT_FOUND: "User not found",
       COULD_NOT_PARSE_CREDS: "Could not parse credentials",
-      MISMATCH_OTP:
-        "Invalid OTP! Inputted otp does not match any on our database",
-      OTP_LIMIT: "Too many invalid attempts! Please try again later",
+      MISMATCH_OTP: "Inputted OTP is invalid!",
+      OTP_LIMIT: "Too many invalid attempts! Please try again after 5 minutes.",
       CHANGE_PASSWORD_FAILED:
         "Something went wrong. We couldn't change your password",
+      REQUIRED_EMAIL: "Email is required",
+      RESTRICTED: "Restricted",
+      OLD_PASWORD_REQUIRED: "Current Password is required",
+      PASSWORD_REQUIRED: "Password is required",
     },
     VALIDATION: {
       INVALID_EMAIL: "Please provide a valid email address.",
       PASSWORD_TOO_SHORT: "Password must be at least 4 characters long.",
       EXISTING_USER: "User with that email address already exists!",
-      INVALID_OTP: "Invalid OTP! Must be at least 6 characters long",
+      INVALID_OTP: "Please enter a valid 6-digit code",
     },
   },
   EMAIL_NOTIFICATION: {
@@ -126,6 +173,9 @@ export const APP_STRINGS = {
     COMMON: {
       VALIDATED_OTP: "Success! OTP provided is valid",
       PASSWORD_CHANGED: "You have successfully changed your password",
+      PASSWORD_CHANGED_EMAIL:
+        "Password has been changed! Please check your email",
+      SUCCESS: "Success",
     },
   },
 };
