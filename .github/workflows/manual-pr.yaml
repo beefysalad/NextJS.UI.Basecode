@@ -6,11 +6,11 @@ on:
       from_branch:
         description: "Source branch (e.g., main)"
         required: true
-        default: "main"
+        default: "DEV"
       to_branch:
         description: "Target branch (e.g., dev)"
         required: true
-        default: "dev"
+        default: "PROD"
 
 jobs:
   create-pr:
