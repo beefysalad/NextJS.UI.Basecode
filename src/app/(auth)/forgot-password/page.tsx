@@ -1,4 +1,4 @@
-import { MultiStepForm } from "@/app/components/Auth/ForgotPassword";
+import { MultiStepForm } from "@/app/components/Auth/MultiStepForm";
 import React from "react";
 
 const ForgotPassword = () => {

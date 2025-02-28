@@ -397,15 +397,10 @@ export function MultiStepForm() {
               </p>
             </div>
             <div className='flex gap-2 mt-4'>
-              <Button
-                variant='outline'
-                onClick={handleBack}
-                className='flex-1'
-                disabled={loading}
-              >
+              <Button variant='outline' onClick={handleBack} className='flex-1'>
                 {APP_STRINGS.UI.FORGET_PASSWORD.MULTISTEP_FORM.BUTTON.BACK}
               </Button>
-              <Button type='submit' className='flex-1'>
+              <Button type='submit' className='flex-1' disabled={loading}>
                 {loading ? (
                   <>
                     {
